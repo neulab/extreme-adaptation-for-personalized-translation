@@ -1,0 +1,102 @@
+dynet_seed: 314159
+dynet_mem: 10000
+dynet_gpu: True
+dynet_autobatch: 0
+encoder: bilstm
+attention: mlp
+user_recognizer: fact_voc
+decoder: usr_full_voc_lstm
+verbose: True
+att_dim: 256
+emb_dim: 512
+hidden_dim: 512
+usr_dim: 10
+output_dir: output
+max_len: 80
+language_model: uniform
+lex_s2t: ted/en_fr/en-fr.lex
+lex_t2s: ted/en_fr/fr-en.lex
+lex_file: backup_acl/ted_en_fr_lex_file
+src_vocab_size: 40000
+trg_vocab_size: 40000
+train:
+  train: True
+  train_src: ted/en_fr/train.pretrain.en
+  train_trg: ted/en_fr/train.pretrain.fr
+  train_usr: ted/en_fr/train.pretrain.usr
+  valid_src: ted/en_fr/dev.pretrain.en
+  valid_trg: ted/en_fr/dev.pretrain.fr
+  valid_usr: ted/en_fr/dev.pretrain.usr
+  num_epochs: 20
+  batch_size: 32
+  patience: 2
+  dev_batch_size: 10
+  check_train_error_every: 100
+  check_valid_error_every: 2500
+  valid_bleu_every: 10000
+  label_smoothing: 0.1
+  dropout_rate: 0.4
+  word_dropout_rate: 0.1
+  gradient_clip: 1.0
+  trainer: adam
+  learning_rate: 0.001
+  learning_rate_decay: 0.5
+  beam_size: 3
+make_lex:
+  train: True
+  train_src: ted/en_fr/train.pretrain.en
+  train_trg: ted/en_fr/train.pretrain.fr
+  train_usr: ted/en_fr/train.pretrain.usr
+eval:
+  usr_file_list: ted/en_fr/en_fr_list.txt
+  min_n_train: 0
+  max_n_train: 10
+  test_size: 10
+  check_train_error_every: 10
+  num_epochs: 10
+  full_training: True
+  gradient_clip: 0.1
+  trainer: sgd
+  learning_rate: 1.0
+  learning_rate_decay: 0.5
+  beam_size: 5
+qual:
+  test: True
+  test_src: ted/en_fr/test.qual.en
+  test_trg: ted/en_fr/test.qual.fr
+  test_usr: ted/en_fr/test.qual.usr
+  beam_size: 5
+  test_out: output/en_fr_fact_qual.out
+tune:
+  train: True
+  pretrained: True
+  train_src: ted/en_fr/train.pretrain.en
+  train_trg: ted/en_fr/train.pretrain.fr
+  train_usr: ted/en_fr/train.pretrain.usr
+  valid_src: ted/en_fr/dev.pretrain.en
+  valid_trg: ted/en_fr/dev.pretrain.fr
+  valid_usr: ted/en_fr/dev.pretrain.usr
+  num_epochs: 10
+  batch_size: 32
+  patience: 2
+  dev_batch_size: 10
+  check_train_error_every: 100
+  check_valid_error_every: 2500
+  valid_bleu_every: 10000
+  dropout_rate: 0.4
+  word_dropout_rate: 0.1
+  gradient_clip: 0.1
+  trainer: sgd
+  learning_rate: 1.0
+  learning_rate_decay: 0.5
+  label_smoothing: 0.1
+  beam_size: 3
+  src_vocab_size: 40000
+  trg_vocab_size: 40000
+test:
+  test: True
+  test_src: ted/en_fr/test.pretrain.en
+  test_trg: ted/en_fr/test.pretrain.fr
+  test_usr: ted/en_fr/test.pretrain.usr
+  beam_size: 5
+  bootstrap_size: 100
