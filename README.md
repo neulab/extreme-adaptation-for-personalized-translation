@@ -4,7 +4,7 @@ This repository contains the code for the paper [Extreme Adaptation for Personal
 
 ## Data
 
-The data used in the paper is the SATED dataset, available at this url: http://www.cs.cmu.edu/~pmichel1/sated/.
+The data used in the paper is the SATED dataset, available at this url: https://pmichel31415.github.io/sated/.
 
 Additional experiments were performed on the gender annotated europarl corpus from \[1\], available at this url https://www.kaggle.com/ellarabi/europarl-annotated-for-speaker-gender-and-age.
 
